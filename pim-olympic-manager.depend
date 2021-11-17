@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1637085739 source:/home/rafael/Projetos/Faculdade/pim-olympic-manager/pim.c
+	<stdio.h>
+	<stdlib.h>
+
