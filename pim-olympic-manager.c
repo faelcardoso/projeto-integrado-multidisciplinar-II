@@ -17,22 +17,28 @@ Tema: Software de auxílio no gerenciamento dos eventos dos Jogos Olímpicos em 
 #include <stdlib.h>
 #include <string.h>
 #include <ncurses.h>
+#include <unistd.h>
 
 /* Declaração das Funções */
 
+void vFecharPrograma(void);
 void vMenuPrincipal(void);
 void vFuncionalidadeCadastro(void);
 void vFuncionalidadeConsultaCadastros(void);
 void vFuncionalidadeCalendarioOlimpico(void);
 void vFuncionalidadeQuadroMedalhas(void);
+int getchar(void);
+
 
 /* Declaração das funções */
 
+int iEscolhaFuncionalidade;
+
 int main (void) {
 
-    printf("\vSeja bem-vindo(a) ao Olympic Manager!\n\v\v\v\v\v");
+    printf("\vSeja bem-vindo(a) ao Olympic Manager!\n\v");
     printf("Como usar o programa?\n\vA navegação pelo sistema é feita através das teclas do seu teclado. Digite o \nnúmero correspondente a funcionalidade desejada e em seguida \npressione ENTER para confirmar a Escolha!\n\v");
-    printf("Pressione ENTER para continuar!\n\v");
+    puts("Press enter to continue ... ");
     getchar();
     vMenuPrincipal();
 
@@ -45,10 +51,7 @@ void vMenuPrincipal (void) {
 
     system("clear");
 
-    int iEscolhaFuncionalidade;
-    iEscolhaFuncionalidade = 0;
-
-    printf("\vEste é o menu principal!\n\vEscolha a funcionalidade desejada digitando o número correspondente à elam em seguida pressione ENTER:\n\v");
+    printf("\vEste é o menu principal!\n\vEscolha a funcionalidade desejada digitando o número correspondente à ela em seguida pressione ENTER:\n\v");
 
     printf("Menu principal\n\v");
     printf("0 - Fechar o programa\n\v");
@@ -63,7 +66,7 @@ void vMenuPrincipal (void) {
     switch(iEscolhaFuncionalidade) {
 
         case 0:
-            exit(0);
+            vFecharPrograma();
         break;
 
         case 1:
@@ -109,6 +112,7 @@ void vFuncionalidadeCadastro (void) {
 
     printf("Digite o número da funcionalidade desejada:");
 
+
     return;
 }
 
@@ -152,3 +156,31 @@ void vFuncionalidadeQuadroMedalhas (void) {
 }
 
 /* 4 - Funcionalidades do Quadro de medalhas */
+
+/* Fechar o programa */
+
+void vFecharPrograma (void) {
+
+    system("clear");
+
+    printf("Deseja mesmo fechar o programa?\n\v1 - Sim\n\v2 - Não\n\vDigite a sua escolha: ");
+    scanf("%d", &iEscolhaFuncionalidade);
+
+    switch (iEscolhaFuncionalidade) {
+
+    case 1:
+        exit(0);
+    break;
+
+    case 2:
+        vMenuPrincipal();
+    break;
+
+    default :
+        printf("Digite uma opção válida!\n");
+        vFecharPrograma();
+    break;
+    };
+
+    return;
+}
