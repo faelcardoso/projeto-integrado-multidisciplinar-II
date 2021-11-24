@@ -26,33 +26,50 @@ char *: 3,\
 void *: 4,\
 default: 5)
 
-int iEscolhaFuncionalidade; //Variável escolha Funcionalidade
+int iEscolhaFuncionalidade = 0; //Variável escolha Funcionalidade
 
 void vVerificacaoEscolha (void) { //Verificar se a variável é um número inteiro
 
     int tipoVar = typeof(iEscolhaFuncionalidade);
 
-    do {
+    while (tipoVar != 1) {
 
         iEscolhaFuncionalidade = 404;
 
-    } while (tipoVar != 1);
+    }
 
-    return;
 }
 
-/* Declaração das Funções */
+// Declaração dos protótipos das Funções
 
-void vFecharPrograma(void);
-int iMenuPrincipal(void);
+// Funções principais
+
+int iFecharPrograma();
+void vMenuPrincipal(void);
 void vFuncionalidadeCadastro(void);
 void vFuncionalidadeConsultaCadastros(void);
 void vFuncionalidadeCalendarioOlimpico(void);
 void vFuncionalidadeQuadroMedalhas(void);
 int getchar(void);
-void clrscr();
-void vVerificacaoEscolha(void);
-int iErroDigitacao();
+void clrscr(); //limpa tela
+void vVerificacaoEscolha(void); //verificação de digitação na variável de escolha
+int iErroDigitacao(); //caso ocorra erro na digitação da variável de escolha
+
+//Funções de cadastro
+
+int iCadastroAlojamento(void);
+int iCadastroAtleta(void);
+int iCadastroAtletaFeminino(void);
+int iCadastroAtletaMasculino(void);
+int iCadastroEquipamentoNecessario();
+int iCadastroEsportes(void);
+int iCadastroCategoria(void);
+int iCadastroFuncionarios(void);
+int iCadastroLocalTreino(void);
+int iCadastroModalidade(void);
+int iCadastroPaises(void);
+int iCadastroSedeEvento(void);
+int iCadastroVoluntarios(void);
 
 //Funcoes Visualizar Cadastros
 void vVisualizarAlojamento(void);
@@ -65,26 +82,25 @@ void vVisualizarPaises(void);
 void vVisualizarSedesDeEvento(void);
 void vVisualizarVoluntarios(void);
 
-
 /* Declaração das funções */
 
-int main (void) {
+int main () {
 
     clrscr();
     printf("\vSeja bem-vindo(a) ao Olympic Manager!\n\v");
     printf("Como usar o programa?\n\vA navegação pelo sistema é feita através das teclas do seu teclado. Digite o \nnúmero correspondente a funcionalidade desejada e em seguida \npressione ENTER para confirmar a Escolha!\n\v");
     puts("Pressione ENTER para continuar... ");
-        getchar();
+    getchar();
     printf("\vVocê verá o menu principal agora!\n\vEscolha a funcionalidade desejada digitando o número correspondente à ela em seguida pressione ENTER:\n\v");
-        getchar();
-    iMenuPrincipal();
+    getchar();
+    vMenuPrincipal();
 
     return 0;
-}
+ }
 
 /* 0 - Menu inicial/Principal */
 
-int iMenuPrincipal (void) {
+void vMenuPrincipal (void) {
 
     clrscr();
 
@@ -103,7 +119,7 @@ int iMenuPrincipal (void) {
     switch(iEscolhaFuncionalidade) {
 
         case 0:
-            vFecharPrograma();
+            iFecharPrograma();
         break;
 
         case 1:
@@ -128,7 +144,6 @@ int iMenuPrincipal (void) {
 
     }
 
-    return 0;
 }
 
 /* Erro digitação número */
@@ -164,8 +179,7 @@ void clrscr(){
 void vFuncionalidadeCadastro (void) {
 
     clrscr();
-    printf("%d", typeof(iEscolhaFuncionalidade));
-    printf("\vFuncionalidades de Cadastro:\n\v");
+    printf("Funcionalidades de Cadastro:\n\v");
 
     printf("0 - Voltar\n\v");
     printf("1 - Cadastro de Alojamentos\n\v");
@@ -178,22 +192,184 @@ void vFuncionalidadeCadastro (void) {
     printf("8 - Cadastro de Sedes de Eventos\n\v");
     printf("9 - Cadastro de Voluntários\n\v");
 
-    printf("Digite o número da funcionalidade desejada:");
+    printf("Digite o número da funcionalidade desejada: ");
     scanf("%d", &iEscolhaFuncionalidade);
 
     switch (iEscolhaFuncionalidade) {
 
     case 0:
-        iMenuPrincipal();
+        vMenuPrincipal();
     break;
+
     case 1:
-        printf("Deu errado!");
+        iCadastroAlojamento();
+    break;
+
+    case 2:
+        iCadastroAtleta();
+    break;
+
+    case 3:
+        iCadastroEquipamentoNecessario();
+    break;
+
+    case 4:
+        iCadastroEsportes();
+    break;
+
+    case 5:
+        iCadastroFuncionarios();
+    break;
+
+    case 6:
+        iCadastroLocalTreino();
+    break;
+
+    case 7:
+        iCadastroPaises();
+    break;
+
+    case 8:
+        iCadastroSedeEvento();
+    break;
+
+    case 9:
+        iCadastroVoluntarios();
+    break;
+
+    case 404:
+        iErroDigitacao();
     break;
     }
 
     return;
 }
 
+int iCadastroAlojamento (void) {
+
+    int iNumPredioAlojamentoCad;
+
+    clrscr();
+
+    printf("*********IMPORTANTE*********\n");
+    printf("Todos os atletas deverão ficar hospedados na Vila Olímpica, afim de evitar\npossíveis complicações com a COVID-19.\n\v");
+    printf("Digite o número do prédio do alojamento: ");
+        scanf("%d", &iNumPredioAlojamentoCad);
+    printf("\n\vO número do prédio do alojamento digitado foi: %d\n\v", iNumPredioAlojamentoCad);
+
+    printf("Digite 1 para continuar: ");
+        scanf("%d", &iEscolhaFuncionalidade);
+    vVerificacaoEscolha();
+
+    switch (iEscolhaFuncionalidade) {
+
+    case 1:
+        vFuncionalidadeCadastro();
+    break;
+
+    case 404:
+        iErroDigitacao();
+    break;
+
+    }
+    return 0;
+}
+
+int iCadastroEsportes (void) {
+    return 0;
+}
+
+int iCadastroCategoria (void) {
+    return 0;
+}
+
+int iCadastroModalidade (void) {
+    return 0;
+}
+
+int iCadastroPaises (void) {
+    return 0;
+}
+
+int iCadastroAtleta (void) {
+
+    int iAtletaMasculino;
+    int iAtletaFeminino;
+
+    iAtletaMasculino = iCadastroAtletaMasculino();
+    iAtletaFeminino = iCadastroAtletaFeminino();
+
+    clrscr();
+
+    printf("Selecione o gênero do atleta para cadastrar:\n\v1 - Feminino\n\v2 - Masculino\n\v");
+    printf("Digite o número da funcionalidade desejada:");
+        scanf("%d", &iEscolhaFuncionalidade);
+
+    return 0;
+}
+
+int iCadastroAtletaMasculino (void) {
+    return 0;
+}
+
+int iCadastroAtletaFeminino (void) {
+    return 0;
+}
+
+int iCadastroSedeEvento (void) {
+    return 0;
+}
+
+int iCadastroLocalTreino (void) {
+    return 0;
+}
+
+int iCadastroEquipamentoNecessario () {
+
+    clrscr();
+
+    char cNomeEquipamento[25];
+    int iQuantidadeEquipamento = 0;
+
+    printf("Essa é a tela de cadastro de equipamentos!\n\v");
+    printf("Digite o nome do equipamento para cadastro: ");
+        getchar();
+            fgets(cNomeEquipamento, 25, stdin);
+                getchar();
+    printf("\nAgora digite a quantidade:");
+        setbuf(stdin, NULL);
+            scanf("%d", &iQuantidadeEquipamento);
+                getchar();
+
+    printf("\n\vO nome do equipamento é: "); puts(cNomeEquipamento);
+    printf("A quantidade do mesmo é: %d\n\v", iQuantidadeEquipamento);
+
+    printf("Digite 1 para voltar: ");
+    scanf("%d", &iEscolhaFuncionalidade);
+
+    switch(iEscolhaFuncionalidade) {
+
+    case 1:
+        vFuncionalidadeCadastro();
+    break;
+
+    case 404:
+        iErroDigitacao();
+    break;
+
+    }
+
+    return 0;
+}
+
+int iCadastroFuncionarios (void) {
+    return 0;
+}
+
+int iCadastroVoluntarios (void) {
+    return 0;
+
+}
 /* 1 - Funcionalidades de Cadastro*/
 
 /* 2 - Funcionalidades de consulta de cadastros */
@@ -217,11 +393,12 @@ void vFuncionalidadeConsultaCadastros(void) {
 
     printf("Digite o número da funcionalidade desejada: ");
     scanf("%d", &iEscolhaFuncionalidade);
+    vVerificacaoEscolha();
 
     switch (iEscolhaFuncionalidade){
 
         case 0:
-            iMenuPrincipal();
+            vMenuPrincipal();
          break;
 
         case 1:
@@ -260,6 +437,9 @@ void vFuncionalidadeConsultaCadastros(void) {
            vVisualizarVoluntarios();
         break;
 
+        case 404:
+            iErroDigitacao();
+        break;
     }
 
     return;
@@ -278,6 +458,7 @@ void vVisualizarAlojamento(void) {
 
     printf("Digite o número da funcionalidade desejada: ");
     scanf("%d", &iEscolhaFuncionalidade);
+    vVerificacaoEscolha();
 
     switch (iEscolhaFuncionalidade) {
 
@@ -285,11 +466,14 @@ void vVisualizarAlojamento(void) {
         vFuncionalidadeConsultaCadastros();
     break;
 
-    default:
-        clrscr();
-        printf("Digite 0 para voltar...\n\v");
-        return vVisualizarAlojamento();
-        break;
+    case 1:
+        vMenuPrincipal();
+    break;
+
+    case 404:
+        iErroDigitacao();
+    break;
+
     };
 
     return;
@@ -415,7 +599,7 @@ void vFuncionalidadeQuadroMedalhas (void) {
 
 /* Fechar o programa */
 
-void vFecharPrograma (void) {
+int iFecharPrograma () {
 
     clrscr();
 
@@ -429,14 +613,10 @@ void vFecharPrograma (void) {
     break;
 
     case 2:
-        iMenuPrincipal();
+        vMenuPrincipal();
     break;
 
-    default :
-        printf("Digite uma opção válida!\n");
-        vFecharPrograma();
-    break;
-    };
+    }
 
-    return;
+    return 0;
 }
