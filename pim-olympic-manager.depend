@@ -3,9 +3,10 @@
 	<stdio.h>
 	<stdlib.h>
 
-1637753192 source:/home/rafael/Projetos/Faculdade/pim-olympic-manager/pim-olympic-manager.c
+1637814151 source:/home/rafael/Projetos/Faculdade/pim-olympic-manager/pim-olympic-manager.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<unistd.h>
+	<locale.h>
 

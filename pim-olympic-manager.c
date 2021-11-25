@@ -17,6 +17,7 @@ Tema: Software de auxílio no gerenciamento dos eventos dos Jogos Olímpicos em 
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <locale.h>
 
 #define typeof(var) _Generic( (var),\
 char: 0,\
@@ -86,14 +87,17 @@ void vVisualizarVoluntarios(void);
 
 int main () {
 
-    clrscr();
-    printf("\vSeja bem-vindo(a) ao Olympic Manager!\n\v");
+    setlocale(LC_ALL, "pt-BR");
+
+        clrscr();
+    printf("Seja bem-vindo(a) ao Olympic Manager!\n\v");
     printf("Como usar o programa?\n\vA navegação pelo sistema é feita através das teclas do seu teclado. Digite o \nnúmero correspondente a funcionalidade desejada e em seguida \npressione ENTER para confirmar a Escolha!\n\v");
-    puts("Pressione ENTER para continuar... ");
-    getchar();
-    printf("\vVocê verá o menu principal agora!\n\vEscolha a funcionalidade desejada digitando o número correspondente à ela em seguida pressione ENTER:\n\v");
-    getchar();
-    vMenuPrincipal();
+    printf("Pressione ENTER para continuar...\n");
+        getchar();
+            clrscr();
+    printf("Você verá o menu principal agora!\n\vEscolha a funcionalidade desejada digitando o número correspondente à ela em seguida pressione ENTER:\n\v");
+        getchar();
+            vMenuPrincipal();
 
     return 0;
  }
@@ -251,11 +255,12 @@ int iCadastroAlojamento (void) {
 
     clrscr();
 
+    printf("Cadastro de alojamento\n\v");
     printf("*********IMPORTANTE*********\n");
     printf("Todos os atletas deverão ficar hospedados na Vila Olímpica, afim de evitar\npossíveis complicações com a COVID-19.\n\v");
     printf("Digite o número do prédio do alojamento: ");
         scanf("%d", &iNumPredioAlojamentoCad);
-    printf("\n\vO número do prédio do alojamento digitado foi: %d\n\v", iNumPredioAlojamentoCad);
+    printf("\nO número do prédio do alojamento digitado foi: Prédio %d\n\v", iNumPredioAlojamentoCad);
 
     printf("Digite 1 para continuar: ");
         scanf("%d", &iEscolhaFuncionalidade);
@@ -276,51 +281,336 @@ int iCadastroAlojamento (void) {
 }
 
 int iCadastroEsportes (void) {
+
+    clrscr();
+
+    printf("Cadastro de esportes\n\v");
+    printf("Deseja cadastrar uma Modalidade ou Categoria:\n\v");
+    printf("1 - Modalidade\n\v2 - Categoria\n\v");
+    printf("Digite o número da funcionalidade desejada: ");
+        setbuf(stdin, NULL);
+            scanf("%d", &iEscolhaFuncionalidade);
+                vVerificacaoEscolha();
+
+    switch (iEscolhaFuncionalidade) {
+
+        case 0:
+            vFuncionalidadeCadastro();
+        break;
+
+        case 1:
+            iCadastroModalidade();
+        break;
+
+        case 2:
+            iCadastroCategoria();
+        break;
+
+        case 404:
+            iErroDigitacao();
+        break;
+
+    }
+
     return 0;
 }
 
 int iCadastroCategoria (void) {
+
+    char cNomeModalidade[36];
+    char cNomeCategoria[36];
+
+    clrscr();
+
+    printf("Cadastro de categoria\n\v");
+    printf("Digite o nome da modalidade da categoria: ");
+        getchar();
+            fgets(cNomeModalidade, 36, stdin);
+    printf("\vDigite o nome da categoria: ");
+        fgets(cNomeCategoria, 36, stdin);
+            setbuf(stdin, NULL);
+        clrscr();
+
+    printf("A modalidade digitada foi: "); puts(cNomeModalidade);
+    printf("A categoria digitada foi: "); puts(cNomeCategoria);
+
+    printf("Digite 1 para continuar: ");
+        scanf("%d", &iEscolhaFuncionalidade);
+    vVerificacaoEscolha();
+
+    switch (iEscolhaFuncionalidade) {
+
+        case 1:
+            vFuncionalidadeCadastro();
+        break;
+
+        case 404:
+            iErroDigitacao();
+        break;
+
+    }
+
     return 0;
 }
 
 int iCadastroModalidade (void) {
+
+    char cNomeModalidade[36];
+
+    clrscr();
+
+    printf("Cadastro de modalidade\n\v");
+    printf("Digite o nome da modalidade: ");
+        getchar();
+            fgets(cNomeModalidade, 36, stdin);
+                setbuf(stdin, NULL);
+        clrscr();
+
+    printf("A modalidade digitada foi: "); puts(cNomeModalidade);
+
+    printf("Digite 1 para continuar: ");
+        scanf("%d", &iEscolhaFuncionalidade);
+    vVerificacaoEscolha();
+
+    switch (iEscolhaFuncionalidade) {
+
+        case 1:
+            vFuncionalidadeCadastro();
+        break;
+
+        case 404:
+            iErroDigitacao();
+        break;
+
+    }
+
     return 0;
 }
 
 int iCadastroPaises (void) {
+
+    char cNomePais[26];
+
+    clrscr();
+
+    printf("Cadastro de países\n\v");
+    printf("Digite o nome do país: ");
+        getchar();
+            fgets(cNomePais, 26, stdin);
+                setbuf(stdin, NULL);
+        clrscr();
+
+    printf("O nome do País digitado foi: "); puts(cNomePais);
+
+    printf("Digite 1 para continuar: ");
+        scanf("%d", &iEscolhaFuncionalidade);
+    vVerificacaoEscolha();
+
+    switch (iEscolhaFuncionalidade) {
+
+        case 1:
+            vFuncionalidadeCadastro();
+        break;
+
+        case 404:
+            iErroDigitacao();
+        break;
+
+    }
+
     return 0;
 }
 
 int iCadastroAtleta (void) {
 
-    int iAtletaMasculino;
-    int iAtletaFeminino;
-
-    iAtletaMasculino = iCadastroAtletaMasculino();
-    iAtletaFeminino = iCadastroAtletaFeminino();
-
     clrscr();
 
-    printf("Selecione o gênero do atleta para cadastrar:\n\v1 - Feminino\n\v2 - Masculino\n\v");
-    printf("Digite o número da funcionalidade desejada:");
+    printf("Cadastro de Atleta\n\v");
+    printf("Selecione o gênero do atleta para cadastrar:\n\v0 - Cancelar cadastro\n\v1 - Feminino\n\v2 - Masculino\n\v");
+    printf("Digite o número da funcionalidade desejada: ");
         scanf("%d", &iEscolhaFuncionalidade);
+    vVerificacaoEscolha();
+
+    switch (iEscolhaFuncionalidade) {
+
+        case 0:
+            vFuncionalidadeCadastro();
+        break;
+
+        case 1:
+            iCadastroAtletaFeminino();
+        break;
+
+        case 2:
+            iCadastroAtletaMasculino();
+        break;
+
+    }
 
     return 0;
 }
 
 int iCadastroAtletaMasculino (void) {
+
+    char cNomeAtleta[36];
+    int iIdadeAtleta;
+    double dAlturaAtleta;
+    double dPesoAtleta;
+
+    clrscr();
+
+    printf("Cadastro de Atleta Gênero: Masculino\n\v");
+    printf("Use um ponto para separar as casas decimais, por favor!\nCaso contrário o programa fechará. :D\n\v");
+    printf("Digite o nome do Atleta: ");
+        getchar();
+            fgets(cNomeAtleta, 36, stdin);
+                getchar();
+    printf("Digite a idade do atleta: ");
+        setbuf(stdin, NULL);
+            scanf("%d", &iIdadeAtleta);
+    printf("\nDigite a altura do atleta em metros(m): ");
+        scanf("%lf", &dAlturaAtleta);
+    printf("\nDigite o peso do atleta em Quilogramas(Kg): ");
+        scanf("%lf", &dPesoAtleta);
+            clrscr();
+    printf("\nO nome do Atleta é: "); puts(cNomeAtleta);
+    printf("A idade do atleta é: %d Anos", iIdadeAtleta);
+    printf("\n\vA altura do atleta é: %1.2lfm", dAlturaAtleta);
+    printf("\n\vO peso do atleta é: %1.2lfKg\n\v", dPesoAtleta);
+
+    printf("Digite 1 para continuar: ");
+    scanf("%d", &iEscolhaFuncionalidade);
+
+    switch(iEscolhaFuncionalidade) {
+
+    case 1:
+        vFuncionalidadeCadastro();
+    break;
+
+    case 404:
+        iErroDigitacao();
+    break;
+
+    }
+
     return 0;
 }
 
 int iCadastroAtletaFeminino (void) {
+
+    char cNomeAtleta[36];
+    int iIdadeAtleta;
+    double dAlturaAtleta;
+    double dPesoAtleta;
+
+    clrscr();
+
+    printf("Cadastro de Atleta Gênero: Feminino\n\v");
+    printf("Use um ponto para separar as casas decimais, por favor!\nCaso contrário o programa fechará. :D\n\v");
+    printf("Digite o nome da Atleta: ");
+        getchar();
+            fgets(cNomeAtleta, 36, stdin);
+                getchar();
+    printf("Digite a idade da atleta: ");
+        setbuf(stdin, NULL);
+            scanf("%d", &iIdadeAtleta);
+    printf("\nDigite a altura da atleta em metros(m): ");
+        scanf("%lf", &dAlturaAtleta);
+    printf("\nDigite o peso da atleta em Quilogramas(Kg): ");
+        scanf("%lf", &dPesoAtleta);
+            clrscr();
+    printf("\nO nome da Atleta é: "); puts(cNomeAtleta);
+    printf("A idade da atleta é: %d Anos", iIdadeAtleta);
+    printf("\n\vA altura da atleta é: %1.2lfm", dAlturaAtleta);
+    printf("\n\vO peso da atleta é: %1.2lfKg\n\v", dPesoAtleta);
+
+    printf("Digite 1 para continuar: ");
+    scanf("%d", &iEscolhaFuncionalidade);
+
+    switch(iEscolhaFuncionalidade) {
+
+        case 1:
+            vFuncionalidadeCadastro();
+        break;
+
+        case 404:
+            iErroDigitacao();
+        break;
+
+    }
+
     return 0;
 }
 
 int iCadastroSedeEvento (void) {
+
+    char cNomeSedeEvento[56];
+
+    clrscr();
+
+    printf("Cadastro de sede de evento\n\v");
+    printf("Digite o nome da sede de evento: ");
+        getchar();
+            fgets(cNomeSedeEvento, 56, stdin);
+                setbuf(stdin, NULL);
+        clrscr();
+
+    printf("O nome da sede de evento digitado foi: "); puts(cNomeSedeEvento);
+
+    printf("Digite 1 para continuar: ");
+        scanf("%d", &iEscolhaFuncionalidade);
+    vVerificacaoEscolha();
+
+    switch (iEscolhaFuncionalidade) {
+
+        case 1:
+            vFuncionalidadeCadastro();
+        break;
+
+        case 404:
+            iErroDigitacao();
+        break;
+
+    }
+
     return 0;
 }
 
 int iCadastroLocalTreino (void) {
+
+    char cNomeLocalTreino[56];
+    int iCapacidadeMaximaLocalTreino;
+
+    clrscr();
+
+    printf("Cadastro de Local de Treino\n\v");
+    printf("Digite o nome do Local de treino: ");
+        getchar();
+            fgets(cNomeLocalTreino, 56, stdin);
+    printf("\nDigite a capacidade máxima do local de treino: ");
+        setbuf(stdin, NULL);
+            scanf("%d", &iCapacidadeMaximaLocalTreino);
+
+    clrscr();
+
+    printf("\nO nome do local de treino digitado foi: "); puts(cNomeLocalTreino);
+    printf("A capacidade máxima digitada foi: %d pessoa(s)\n\v", iCapacidadeMaximaLocalTreino);
+
+    printf("Digite 1 para continuar: ");
+    scanf("%d", &iEscolhaFuncionalidade);
+
+    switch(iEscolhaFuncionalidade) {
+
+        case 1:
+            vFuncionalidadeCadastro();
+        break;
+
+        case 404:
+            iErroDigitacao();
+        break;
+
+    }
+
     return 0;
 }
 
@@ -329,20 +619,19 @@ int iCadastroEquipamentoNecessario () {
     clrscr();
 
     char cNomeEquipamento[25];
-    int iQuantidadeEquipamento = 0;
+    int iQuantidadeEquipamento;
 
-    printf("Essa é a tela de cadastro de equipamentos!\n\v");
+    printf("Cadastro de equipamentos!\n\v");
     printf("Digite o nome do equipamento para cadastro: ");
         getchar();
             fgets(cNomeEquipamento, 25, stdin);
-                getchar();
-    printf("\nAgora digite a quantidade:");
+    printf("\nAgora digite a quantidade: ");
         setbuf(stdin, NULL);
             scanf("%d", &iQuantidadeEquipamento);
                 getchar();
 
-    printf("\n\vO nome do equipamento é: "); puts(cNomeEquipamento);
-    printf("A quantidade do mesmo é: %d\n\v", iQuantidadeEquipamento);
+    printf("\nO nome do equipamento é: "); puts(cNomeEquipamento);
+    printf("A quantidade necessária é: %d\n\v", iQuantidadeEquipamento);
 
     printf("Digite 1 para voltar: ");
     scanf("%d", &iEscolhaFuncionalidade);
@@ -363,10 +652,82 @@ int iCadastroEquipamentoNecessario () {
 }
 
 int iCadastroFuncionarios (void) {
+
+    char cNomeFuncionario[56];
+    char cFuncaoFuncionario[56];
+
+    clrscr();
+
+    printf("Cadastro de funcionarios\n\v");
+    printf("Digite o nome do funcionário: ");
+        getchar();
+            fgets(cNomeFuncionario, 56, stdin);
+                setbuf(stdin, NULL);
+    printf("\nDigite a função do funcionário: ");
+        getchar();
+            fgets(cFuncaoFuncionario, 56, stdin);
+                setbuf(stdin, NULL);
+
+        clrscr();
+
+    printf("O nome do funcionário digitado foi: "); puts(cNomeFuncionario);
+    printf("A função do funcionário é: "); puts(cFuncaoFuncionario);
+
+    printf("Digite 1 para continuar: ");
+        scanf("%d", &iEscolhaFuncionalidade);
+    vVerificacaoEscolha();
+
+    switch (iEscolhaFuncionalidade) {
+
+        case 1:
+            vFuncionalidadeCadastro();
+        break;
+
+        case 404:
+            iErroDigitacao();
+        break;
+    }
+
     return 0;
 }
 
 int iCadastroVoluntarios (void) {
+
+    char cNomeVoluntario[56];
+    char cFuncaoVoluntario[56];
+
+    clrscr();
+
+    printf("Cadastro de voluntarios\n\v");
+    printf("Digite o nome do voluntário: ");
+        getchar();
+            fgets(cNomeVoluntario, 56, stdin);
+                setbuf(stdin, NULL);
+    printf("\nDigite a função do voluntário: ");
+        getchar();
+            fgets(cFuncaoVoluntario, 56, stdin);
+                setbuf(stdin, NULL);
+
+        clrscr();
+
+    printf("O nome do voluntário digitado foi: "); puts(cNomeVoluntario);
+    printf("A função do voluntário é: "); puts(cFuncaoVoluntario);
+
+    printf("Digite 1 para continuar: ");
+        scanf("%d", &iEscolhaFuncionalidade);
+    vVerificacaoEscolha();
+
+    switch (iEscolhaFuncionalidade) {
+
+        case 1:
+            vFuncionalidadeCadastro();
+        break;
+
+        case 404:
+            iErroDigitacao();
+        break;
+    }
+
     return 0;
 
 }
