@@ -1,8 +1,14 @@
 # Projeto Integrado Multidisciplinar II
 
+---
+
 ## Universidade Paulista
 
+---
+
 ### Integrantes do grupo:
+
+---
 
 - Braian Santos
 - João Henrique
