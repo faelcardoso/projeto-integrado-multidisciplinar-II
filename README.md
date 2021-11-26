@@ -1,7 +1,5 @@
 # Projeto Integrado Multidisciplinar II
 
----
-
 ### Universidade Paulista
 
 ---
