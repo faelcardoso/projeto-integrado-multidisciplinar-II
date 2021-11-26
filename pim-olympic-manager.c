@@ -17,7 +17,6 @@ Tema: Software de auxílio no gerenciamento dos eventos dos Jogos Olímpicos em 
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <locale.h>
 
 #define typeof(var) _Generic( (var),\
 char: 0,\
@@ -73,6 +72,7 @@ int iCadastroSedeEvento(void);
 int iCadastroVoluntarios(void);
 
 //Funcoes Visualizar Cadastros
+
 void vVisualizarAlojamento(void);
 void vVisualizarAtletas(void);
 void vVisualizarEquipamentoNecessarios(void);
@@ -83,15 +83,28 @@ void vVisualizarPaises(void);
 void vVisualizarSedesDeEvento(void);
 void vVisualizarVoluntarios(void);
 
+// Funções do calendário Olímpico
+
+int iCadastroEvento(void);
+int iCalendarioDeEventos(void);
+int iCadastroEventoOlimpico(void);
+int iCadastroEventoOutros(void);
+int iExemploDiaEvento(void);
+
+// Funções do quadro de medalhas
+
+int iAtribuirMedalha(void);
+int iAtribuirMedalhaSelecaoAtl(void);
+int iRanqueMedalhas(void);
+int iRanqueMedalhasExemploAtleta(void);
+
 /* Declaração das funções */
 
 int main () {
 
-    setlocale(LC_ALL, "pt-BR");
-
         clrscr();
     printf("Seja bem-vindo(a) ao Olympic Manager!\n\v");
-    printf("Como usar o programa?\n\vA navegação pelo sistema é feita através das teclas do seu teclado. Digite o \nnúmero correspondente a funcionalidade desejada e em seguida \npressione ENTER para confirmar a Escolha!\n\v");
+    printf("Como usar o programa?\n\vA navegação pelo sistema é feita através das teclas do seu teclado. Digite o \nnúmero correspondente a funcionalidade desejada e em seguida \npressione ENTER para confirmar a Escolha!\n\vCaso erre algum caractere durante a navegação, o programa será encerrado.\n\v");
     printf("Pressione ENTER para continuar...\n");
         getchar();
             clrscr();
@@ -811,13 +824,13 @@ void vVisualizarAlojamento(void) {
     clrscr();
 
     printf("0 - Voltar\n\v");
-    printf("1 - Predio 1\n\v");
-    printf("2 - Predio 2\n\v");
-    printf("3 - Predio 3\n\v");
-    printf("4 - Predio 4\n\v");
-    printf("5 - Predio 5\n\v");
+    printf("1 - Predio 1 : Capacidade máxima - 200 Pessoas\n\v");
+    printf("2 - Predio 2 : Capacidade máxima - 450 Pessoas\n\v");
+    printf("3 - Predio 3 : Capacidade máxima - 150 Pessoas\n\v");
+    printf("4 - Predio 4 : Capacidade máxima - 250 Pessoas\n\v");
+    printf("5 - Predio 5 : Capacidade máxima - 150 Pessoas\n\v");
 
-    printf("Digite o número da funcionalidade desejada: ");
+    printf("Digite 0 para voltar: ");
     scanf("%d", &iEscolhaFuncionalidade);
     vVerificacaoEscolha();
 
@@ -825,10 +838,6 @@ void vVisualizarAlojamento(void) {
 
     case 0:
         vFuncionalidadeConsultaCadastros();
-    break;
-
-    case 1:
-        vMenuPrincipal();
     break;
 
     case 404:
@@ -841,90 +850,220 @@ void vVisualizarAlojamento(void) {
 }
 
 void vVisualizarAtletas(void){
-clrscr();
-printf("\nVictor Fernando");
-printf("\nRafael Cardoso");
-printf("\nNatanael da Silva");
-printf("\nBraian Santos");
-printf("\nVVictor Laveso");
-printf("\nJoao Henrique\n");
-printf("Voltar\n");
 
-return;
+    clrscr();
+    printf("Lista de Atletas Cadastrados\n\v");
+    printf("0 - Voltar");
+    printf("\n1 - Victor Fernando");
+    printf("\n2 - Rafael Cardoso");
+    printf("\n3 - Natanael da Silva");
+    printf("\n4 - Braian Santos");
+    printf("\n5 - VVictor Laveso");
+    printf("\n6 - Joao Henrique\v\n");
+
+
+    printf("Digite 0 para voltar: ");
+        scanf("%d",&iEscolhaFuncionalidade);
+            vVerificacaoEscolha();
+
+    switch (iEscolhaFuncionalidade){
+
+        case 0:
+            vFuncionalidadeConsultaCadastros();
+        break;
+
+        case 404:
+            iErroDigitacao();
+        break;
+
+    }
+
 }
 
 void vVisualizarEquipamentoNecessarios(void){
-printf("Bolas");
 
-return;
-};
+    clrscr();
+
+    printf("Lista de Equipamentos Necessarios Cadastrados\n");
+    printf("\n0 - Voltar");
+    printf("\n1 - kimono (judo)\n");
+    printf("2 - Uniforme\n");
+    printf("3 - Vara (Salto com vara)\n");
+    printf("4 - Skate\n");
+    printf("5 - Sunga\n");
+    printf("6 - Maiô\n");
+    printf("7 - Oculos (Natacao)\n\v");
+
+    printf("Digite 0 para voltar: ");
+        scanf("%d",&iEscolhaFuncionalidade);
+         vVerificacaoEscolha();
+
+    switch (iEscolhaFuncionalidade){
+        case 0:
+            vFuncionalidadeConsultaCadastros();
+        break;
+
+        case 404:
+            iErroDigitacao();
+        break;
+    }
+
+    return;
+}
+
 void vVisualizarEsportes(void){
-clrscr();
-printf("kimono (judo\n)");
-printf("Uniforme\n");
-printf("Vara (Salto com vara\n)");
-printf("Skate\n");
-printf("Sunga\n");
-printf("maio\n");
-printf("Oculos (Natacao)\n");
-printf("Voltar\n");
+
+    clrscr();
+    printf("Lista de Esportes Cadastrados\n");
+    printf("\n0 - Voltar");
+    printf("\n1 - Judo\n");
+    printf("2 - Futebol\n");
+    printf("3 - Skate\n");
+    printf("4 - Salto com vara\n");
+    printf("5 - Natacao\n\n");
+
+    printf("Digite 0 para voltar: ");
+        scanf("%d",&iEscolhaFuncionalidade);
+            vVerificacaoEscolha();
+
+    switch (iEscolhaFuncionalidade){
+    case 0:
+        vFuncionalidadeConsultaCadastros();
+    break;
+
+    case 404:
+        iErroDigitacao();
+    break;
+    }
 
 return;
+
 }
 void vVisualizarFuncionarios(void){
-clrscr();
-printf("Ricardo Marques\n");
-printf("Jose Alincar\n");
-printf("Francisco Ribeiro\n");
-printf("Josimar Freitas\n");
-printf("Reginaldo Eliziario\n");
-printf("Voltar\n");
+
+    clrscr();
+    printf("Lista de Funcionários Cadastrados\n");
+    printf("\n0 - Voltar");
+    printf("\n1 - Ricardo Marques\n");
+    printf("2 - Jose Alincar\n");
+    printf("3 - Francisco Ribeiro\n");
+    printf("4 - Josimar Freitas\n");
+    printf("5 - Reginaldo Eliziario\n\v");
+    printf("Digite 0 para voltar: ");
+        scanf("%d",&iEscolhaFuncionalidade);
+            vVerificacaoEscolha();
+
+    switch (iEscolhaFuncionalidade){
+    case 0:
+        vFuncionalidadeConsultaCadastros();
+    break;
+
+    case 404:
+        iErroDigitacao();
+    break;
+    }
 
 return;
+
 }
 void vVisualizarLocaisDeTreino(void){
-clrscr();
-printf("Piscina Olimpica\n ");
-printf("Quadra de Tenis\n ");
-printf("Quadra de Volei\n");
-printf("Pista Skate\n");
-printf("Academia Judo\n");
-printf("Voltar\n");
+
+    clrscr();
+    printf("Lista de Locais de treino Cadastrados\n");
+    printf("\n0 - Voltar");
+    printf("\n1 - Piscina Olimpica\n");
+    printf("2 - Quadra de Tenis\n");
+    printf("3 - Quadra de Volei\n");
+    printf("4 - Pista Skate\n");
+    printf("5 - Academia Judo\n\v");
+    printf("Digite 0 para voltar: ");
+        scanf("%d",&iEscolhaFuncionalidade);
+            vVerificacaoEscolha();
+
+    switch (iEscolhaFuncionalidade){
+    case 0:
+        vFuncionalidadeConsultaCadastros();
+    break;
+
+    case 404:
+        iErroDigitacao();
+    break;
+    }
 
 return;
 }
 void vVisualizarPaises(void){
-clrscr();
-printf("Brasil\n");
-printf("China\n");
-printf("Corea do Sul\n");
-printf("Russia\n");
-printf("USA\n");
-printf("Voltar\n");
+    clrscr();
+    printf("Lista de Paises Cadastrados\n");
+    printf("\n0 - Voltar");
+    printf("\n1 - Brasil\n");
+    printf("2 - China\n");
+    printf("3 - Corea do Sul\n");
+    printf("4 - Russia\n");
+    printf("5 - USA\n\v");
+    printf("Digite 0 para voltar: ");
+        scanf("%d",&iEscolhaFuncionalidade);
+            vVerificacaoEscolha();
+
+    switch (iEscolhaFuncionalidade){
+    case 0:
+        vFuncionalidadeConsultaCadastros();
+    break;
+
+    case 404:
+        iErroDigitacao();
+    break;
+    }
 
 return;
 
 }
 void vVisualizarSedesDeEvento(void){
-clrscr();
-printf("Stade de France (Abertura/Encerramento)\n");
-printf("Saint-Denis (Natacao)\n");
-printf("Parc des Princes (Futebol)\n");
-printf("Stade Roland Garros (Tenis)\n");
-printf("Grand Palais Éphémère (Boxe)\n");
-printf("Voltar\n");
+    clrscr();
+    printf("Lista de Sedes de evento Cadastradas\n\v");
+    printf("0 - Voltar");
+    printf("\n1 - Stade de France (Abertura/Encerramento)\n");
+    printf("2 - Saint-Denis (Natacao)\n");
+    printf("3 - Parc des Princes (Futebol)\n");
+    printf("4 - Stade Roland Garros (Tenis)\n");
+    printf("5 - Grand Palais Éphémère (Boxe)\n\v");
+    printf("Digite 0 para voltar: ");
+        scanf("%d",&iEscolhaFuncionalidade);
+            vVerificacaoEscolha();
 
+    switch (iEscolhaFuncionalidade){
+    case 0:
+        vFuncionalidadeConsultaCadastros();
+    break;
+
+    case 404:
+        iErroDigitacao();
+    break;
+    }
 return;
 
 }
 void vVisualizarVoluntarios(void){
-clrscr();
-printf("Isaac Racine\n");
-printf("Donat Desruisseaux\n");
-printf("Rabican St-Jean\n");
-printf("Namo Tougas\n");
-printf("Loring Brochu\n");
-printf("Voltar\n");
+    clrscr();
+    printf("Lista de Voluntários Cadastrados\n");
+    printf("\n1 - Isaac Racine\n");
+    printf("2 - Donat Desruisseaux\n");
+    printf("3 - Rabican St-Jean\n");
+    printf("4 - Namo Tougas\n");
+    printf("5 - Loring Brochu\n\v");
+    printf("Digite 0 para voltar: ");
+        scanf("%d",&iEscolhaFuncionalidade);
+            vVerificacaoEscolha();
+
+    switch (iEscolhaFuncionalidade){
+    case 0:
+        vFuncionalidadeConsultaCadastros();
+    break;
+
+    case 404:
+        iErroDigitacao();
+    break;
+    }
 
 return;
 
@@ -936,11 +1075,230 @@ return;
 
 void vFuncionalidadeCalendarioOlimpico (void) {
 
-    system("clear");
+    clrscr();
 
-    printf("\vCalendário Olímpico\v");
+    printf("\vFuncionalidades do Calendário Olímpico\n\v");
+
+    printf("0 - Voltar\n\v");
+    printf("1 - Cadastro de evento\n\v");
+    printf("2 - Calendário de eventos\n\v");
+
+    printf("Digite a funcionalidade desejada: ");
+        scanf("%d", &iEscolhaFuncionalidade);
+
+    switch (iEscolhaFuncionalidade) {
+
+        case 0:
+            vMenuPrincipal();
+        break;
+
+        case 1:
+            iCadastroEvento();
+        break;
+
+        case 2:
+            iCalendarioDeEventos();
+        break;
+
+        case 404:
+            iErroDigitacao();
+        break;
+    }
 
     return;
+}
+
+int iCadastroEvento (void) {
+
+    clrscr();
+
+    printf("Cadastro de evento\n\v");
+
+    printf("Selecione um tipo de evento para cadastrar:\n\v");
+    printf("0 - Voltar\n\v");
+    printf("1 - Evento olímpico\n\v");
+    printf("2 - Outros\n\v");
+
+    printf("Digite o número da funcionalidade desejada: ");
+    scanf("%d", &iEscolhaFuncionalidade);
+        vVerificacaoEscolha();
+    switch (iEscolhaFuncionalidade) {
+
+        case 0:
+            vFuncionalidadeCalendarioOlimpico();
+        break;
+
+        case 1:
+            iCadastroEventoOlimpico();
+        break;
+
+        case 2:
+            iCadastroEventoOutros();
+        break;
+
+        case 404:
+            iErroDigitacao();
+        break;
+    }
+
+    return 0;
+}
+
+int iCadastroEventoOlimpico (void) {
+
+    int iDiaEventoOlimpico;
+    char cModalidadeEventoOlimpico[56];
+    char cCategoriaEventoOlimpico[56];
+    char cPaisesParticipantes[256];
+    int iHoraEventoOlimpico;
+    int iMinutosEventoOlimpico;
+
+    clrscr();
+
+    printf("Cadastro de evento: Olímpico\n\v");
+    printf("Digite o dia em que o evento será realizado (Entre o dia 0 e 16): ");
+        scanf("%d", &iDiaEventoOlimpico);
+    printf("\nDigite a modalidade do evento olímpico: ");
+        getchar();
+            fgets(cModalidadeEventoOlimpico, 56, stdin);
+                setbuf(stdin, NULL);
+    printf("\nDigite a categoria da modalidade à ser disputada: ");
+        fgets(cCategoriaEventoOlimpico, 56, stdin);
+            setbuf(stdin, NULL);
+    printf("\nDigite os Países que disputarão no Evento: ");
+        fgets(cPaisesParticipantes, 256, stdin);
+            setbuf(stdin, NULL);
+    printf("\nDigite que hora que o evento acontecerá (Sem os minutos): ");
+        scanf("%d", &iHoraEventoOlimpico);
+            setbuf(stdin, NULL);
+    printf("\nDigite os minutos que o evento acontecerá: ");
+        scanf("%d", &iMinutosEventoOlimpico);
+            setbuf(stdin, NULL);
+
+        clrscr();
+
+    printf("O dia em que ocorrerá o evento digitado foi: Dia %d\n", iDiaEventoOlimpico);
+    printf("\nA modalidade à ser competida no evento digitada foi: "); puts(cModalidadeEventoOlimpico);
+    printf("A categoria à ser competida no evento digitada foi: "); puts(cCategoriaEventoOlimpico);
+    printf("Os Países participantes serão: "); puts(cPaisesParticipantes);
+    printf("O horário em que o evento será realizado digitado foi: %d:%d (Horário de: Brasília, DF - UTC-03:00)\n\v", iHoraEventoOlimpico, iMinutosEventoOlimpico);
+
+    printf("Digite 1 para continuar: ");
+        scanf("%d", &iEscolhaFuncionalidade);
+    vVerificacaoEscolha();
+
+    switch (iEscolhaFuncionalidade) {
+
+        case 1:
+            vFuncionalidadeCadastro();
+        break;
+
+        case 404:
+            iErroDigitacao();
+        break;
+    }
+
+    return 0;
+}
+
+int iCadastroEventoOutros (void) {
+
+    int iDiaEventoOutro;
+    char cNomeEventoOutro[256];
+    int iHoraEventoOutro;
+    int iMinutosEventoOutro;
+
+    clrscr();
+
+    printf("Cadastro de evento: Outro\n\v");
+    printf("Digite o dia em que o evento será realizado (Entre o dia 0 e 16): ");
+        scanf("%d", &iDiaEventoOutro);
+            setbuf(stdin, NULL);
+    printf("\nDigite o nome/descrição do evento: ");
+        fgets(cNomeEventoOutro, 256, stdin);
+            setbuf(stdin, NULL);
+    printf("\nDigite que hora que o evento acontecerá (Sem os minutos): ");
+        scanf("%d", &iHoraEventoOutro);
+            setbuf(stdin, NULL);
+    printf("\nDigite os minutos que o evento acontecerá: ");
+        scanf("%d", &iMinutosEventoOutro);
+            setbuf(stdin, NULL);
+
+        clrscr();
+
+    printf("O dia em que ocorrerá o evento digitado foi: Dia %d\n", iDiaEventoOutro);
+    printf("\nO nome do evento digitado foi: "); puts(cNomeEventoOutro);
+    printf("O horário em que o evento será realizado digitado foi: %d:%d (Horário de: Brasília, DF - UTC-03:00)\n\v", iHoraEventoOutro, iMinutosEventoOutro);
+
+    printf("Digite 1 para continuar: ");
+        scanf("%d", &iEscolhaFuncionalidade);
+    vVerificacaoEscolha();
+
+    switch (iEscolhaFuncionalidade) {
+
+        case 1:
+            vFuncionalidadeCadastro();
+        break;
+
+        case 404:
+            iErroDigitacao();
+        break;
+    }
+
+    return 0;
+}
+
+int iCalendarioDeEventos (void) {
+
+    clrscr();
+
+    printf("Calendário de eventos\n\v");
+
+    printf("Escolha um dia para visualizar os eventos cadastrados\n\v");
+    printf("0 - Voltar\n\v");
+    printf("1 - Dia 5\n\v");
+
+    printf("Digite o número da funcionalidade desejada: ");
+        scanf("%d", &iEscolhaFuncionalidade);
+            vVerificacaoEscolha();
+        switch (iEscolhaFuncionalidade) {
+
+            case 0:
+                iCadastroEvento();
+            break;
+
+            case 1:
+                iExemploDiaEvento();
+            break;
+        }
+
+    return 0;
+}
+
+int iExemploDiaEvento (void) {
+
+    clrscr();
+
+    printf("Eventos cadastrados: Dia 5\n\v");
+    printf("1 - Tipo do evento: Olímpico - Volei, Brasil, França: Volei de praia | Horário - 08:00 (Horário de: Brasília, DF - UTC-03:00)\n\v"); // (Tipo do evento - Modalidade, Países participantes: Categoria | Horário - HH:MM (Fuso Horário)
+    printf("2 - Tipo do evento: Outro - Cerimônia de premiação: Volei de Praia | Horário - 20:00 (Horário de: Brasília, DF - UTC-03:00)\n\v"); // (Tipo do evento - Modalidade, Países participantes: Categoria | Horário - HH:MM (Fuso Horário)
+    printf("0 - Voltar\n\v");
+    printf("Digite o número da funcionalidade desejada: ");
+    scanf("%d", &iEscolhaFuncionalidade);
+
+    switch (iEscolhaFuncionalidade) {
+
+        case 0:
+            iCalendarioDeEventos();
+        break;
+
+        case 404:
+            iErroDigitacao();
+        break;
+
+    }
+
+    return 0;
 }
 
 /* 3 - Funcionalidades do Calendário Olímpico */
@@ -949,11 +1307,218 @@ void vFuncionalidadeCalendarioOlimpico (void) {
 
 void vFuncionalidadeQuadroMedalhas (void) {
 
-    system("clear");
+    clrscr();
 
-    printf("\vQuadro de Medalhas\v");
+    printf("Quadro de Medalhas\n\v");
+
+    printf("0 - Voltar\n\v");
+    printf("1 - Atribuir medalhas\n\v");
+    printf("2 - Ranque de medalhas\n\v");
+
+    printf("Digite o número da funcionalidade desejada: ");
+        scanf("%d", &iEscolhaFuncionalidade);
+            vVerificacaoEscolha();
+
+    switch (iEscolhaFuncionalidade) {
+
+        case 0:
+            vMenuPrincipal();
+        break;
+
+        case 1:
+            iAtribuirMedalhaSelecaoAtl();
+        break;
+
+        case 2:
+            iRanqueMedalhas();
+        break;
+
+        case 404:
+            ;iErroDigitacao();
+        break;
+
+    }
 
     return;
+}
+
+int iAtribuirMedalhaSelecaoAtl(void) {
+
+    clrscr();
+
+    printf("Selecione o atleta desejado para atribuir a medalha\n\v");
+    printf("0 - Voltar\n\v");
+    printf("1 - Braian Santos\n\v");
+    printf("2 - João Henrique\n\v");
+    printf("3 - Natanael Araújo\n\v");
+    printf("4 - Rafael Cardoso\n\v");
+    printf("5 - Victor Fernando\n\v");
+    printf("6 - Victor H. Laveso\n\v");
+
+    printf("Digite o número da funcionalidade desejada: ");
+        scanf("%d", &iEscolhaFuncionalidade);
+            vVerificacaoEscolha();
+    switch (iEscolhaFuncionalidade) {
+
+        case 0:
+            vFuncionalidadeQuadroMedalhas();
+        break;
+
+        case 1:
+            iAtribuirMedalha();
+        break;
+
+        case 404:
+            iErroDigitacao();
+        break;
+    }
+
+    return 0;
+}
+
+int iAtribuirMedalha (void) {
+
+    clrscr();
+
+    printf("Atribuir medalha\n\v");
+    printf("1 - Ouro\n\v");
+    printf("2 - Prata\n\v");
+    printf("3 - Bronze\n\v");
+    printf("Selecione uma medalha para atribuir: ");
+        scanf("%d", &iEscolhaFuncionalidade);
+            vVerificacaoEscolha();
+
+    if (iEscolhaFuncionalidade == 1) {
+
+        char cMedalhaAtleta[21] = "Medalha de ouro";
+
+        printf("\nA medalha atribuída ao atleta foi: "); puts(cMedalhaAtleta);
+        printf("\nDigite 1 para continuar: ");
+            scanf("%d", &iEscolhaFuncionalidade);
+                vVerificacaoEscolha();
+
+        switch (iEscolhaFuncionalidade) {
+
+            case 1:
+                vFuncionalidadeQuadroMedalhas();
+            break;
+
+            case 404:
+                iErroDigitacao();
+            break;
+    }
+
+} else if (iEscolhaFuncionalidade == 2) {
+
+    char cMedalhaAtleta[21] = "Medalha de prata";
+
+        printf("\nA medalha atribuída ao atleta foi: "); puts(cMedalhaAtleta);
+        printf("\nDigite 1 para continuar: ");
+            scanf("%d", &iEscolhaFuncionalidade);
+                vVerificacaoEscolha();
+
+        switch (iEscolhaFuncionalidade) {
+
+            case 1:
+                vFuncionalidadeQuadroMedalhas();
+            break;
+
+            case 404:
+                iErroDigitacao();
+            break;
+    }
+
+} else if (iEscolhaFuncionalidade == 3) {
+
+    char cMedalhaAtleta[21] = "Medalha de bronze";
+
+        printf("\nA medalha atribuída ao atleta foi: "); puts(cMedalhaAtleta);
+        printf("\nDigite 1 para continuar: ");
+            scanf("%d", &iEscolhaFuncionalidade);
+                vVerificacaoEscolha();
+
+        switch (iEscolhaFuncionalidade) {
+
+            case 1:
+                vFuncionalidadeQuadroMedalhas();
+            break;
+
+            case 404:
+                iErroDigitacao();
+            break;
+    }
+
+} else {
+
+    printf("Erro!");
+        vMenuPrincipal();
+
+}
+
+    return 0;
+}
+
+int iRanqueMedalhas (void) {
+
+    clrscr();
+
+    printf("Ranque de medalhas\n\v");
+    printf("Selecione um atleta para visualizar as medalhas:\n\v");
+    printf("0 - Voltar\n\v");
+    printf("1 - Braian Santos\n\v");
+    printf("2 - João Henrique\n\v");
+    printf("3 - Natanael Araújo\n\v");
+    printf("4 - Rafael Cardoso\n\v");
+    printf("5 - Victor Fernando\n\v");
+    printf("6 - Victor H. Laveso\n\v");
+
+    printf("Digite o número da funcionalidade desejada: ");
+        scanf("%d", &iEscolhaFuncionalidade);
+            vVerificacaoEscolha();
+    switch (iEscolhaFuncionalidade) {
+
+        case 0:
+            vFuncionalidadeQuadroMedalhas();
+        break;
+
+        case 1:
+            iRanqueMedalhasExemploAtleta();
+        break;
+
+        case 404:
+            iErroDigitacao();
+        break;
+
+    }
+
+    return 0;
+}
+
+int iRanqueMedalhasExemploAtleta (void) {
+
+    clrscr();
+
+    printf("Medalhas atribuídas ao atleta: Braian Santos\n\v");
+    printf("País do atleta: Brasil\n\v");
+    printf("Ouro: 6\n\vPrata: 2\n\vBronze: 8\n\v");
+
+    printf("Digite 1 para continuar: ");
+        scanf("%d", &iEscolhaFuncionalidade);
+            vVerificacaoEscolha();
+
+    switch (iEscolhaFuncionalidade) {
+
+        case 1:
+            iRanqueMedalhas();
+        break;
+
+        case 404:
+            iErroDigitacao();
+        break;
+
+    }
+
+    return 0;
 }
 
 /* 4 - Funcionalidades do Quadro de medalhas */
