@@ -8,7 +8,7 @@
 
 - Braian Santos
 - João Henrique
-- Natanael araújo
+- Natanael Araújo
 - Rafael Cardoso
 - Victor Fernando
 - Victor H. Laveso
