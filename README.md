@@ -2,7 +2,7 @@
 
 ---
 
-## Universidade Paulista
+### Universidade Paulista
 
 ---
 
