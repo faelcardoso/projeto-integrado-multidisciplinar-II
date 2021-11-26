@@ -6,8 +6,6 @@
 
 ### Integrantes do grupo:
 
----
-
 - Braian Santos
 - João Henrique
 - Natanael araújo
